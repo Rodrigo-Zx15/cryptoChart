@@ -57,7 +57,6 @@ window.addEventListener('load',async()=>{
 
 
 
-
 //updates
 btn.addEventListener('click', async (event)=>{
     event.preventDefault();
@@ -72,10 +71,8 @@ btn.addEventListener('click', async (event)=>{
     ;
     chart.data.datasets.push(newCrypto);    
     chart.update();
-    
+    opt.options[opt.options.selectedIndex].setAttribute('disabled','disabled');
 });
-
-
 
 window.setInterval(async()=>{
     let timeStamp = new Date();
