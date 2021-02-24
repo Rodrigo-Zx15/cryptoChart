@@ -72,6 +72,7 @@ btn.addEventListener('click', async (event)=>{
     chart.data.datasets.push(newCrypto);    
     chart.update();
     opt.options[opt.options.selectedIndex].setAttribute('disabled','disabled');
+    opt.options.selectedIndex = opt.options.selectedIndex+1; 
 });
 
 window.setInterval(async()=>{
