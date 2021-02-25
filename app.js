@@ -18,6 +18,7 @@ class Crypto {
 //#QS - querySelectors
 const addCurrencyButton = document.querySelector('#confirm');
 const timeCounter = document.querySelector('#seconds');
+const opt = document.querySelector('#cryptoSelector');
 timeCounter.innerText = updateTimeMs/1000;
 
 //#FC - functions
@@ -47,10 +48,10 @@ function randomRGB(){
     console.log(rgbString);
     return rgbString;
 }
-function createNewCrypto(){
-    const opt = document.querySelector('#cryptoSelector');
+async function createNewCrypto(){
+    
     let label = opt.value;
-    let value = await getValue(newLabel);
+    let value = await getValue(label);
     currentCryptos.push(label)
     label = label.toUpperCase() + '-R$';
     let chartLength = chart.data.labels.length;
@@ -72,7 +73,7 @@ window.addEventListener('load',async()=>{
 addCurrencyButton.addEventListener('click', async (event)=>{
     
     event.preventDefault();
-    let newCrypto = createNewCrypto();
+    let newCrypto = await createNewCrypto();
     chart.data.datasets.push(newCrypto);    
     chart.update();
     opt.options[opt.options.selectedIndex].setAttribute('disabled','disabled');
@@ -127,15 +128,15 @@ let chart = new Chart(mainChart, {
     },
     // Configuration options go here
     options: {
-        scales:{
-            yAxes:[{
-                ticks:{
-                    min: 2000,
-                    max: 15000,
-                    stepSize: 100
-                }
-            }]
-        }
+        // scales:{
+        //     yAxes:[{
+        //         ticks:{
+        //             min: 2000,
+        //             max: 15000,
+        //             stepSize: 100
+        //         }
+        //     }]
+        // }
     }
 });
 
