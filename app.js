@@ -1,5 +1,6 @@
 //global variables
-let cryptos = ['btc'];
+const updateTimeMs = 30000;
+let cryptos = ['eth'];
 class Crypto {
     constructor(label, color, dataIndex, data){
         this.label = label;
@@ -17,9 +18,9 @@ class Crypto {
 }
 
 //querySelectors
-const btn = document.querySelector('#confirm');
-const opt = document.querySelector('#selector');
-
+const addCurrencyButton = document.querySelector('#confirm');
+const timeCounter = document.querySelector('#seconds');
+timeCounter.innerText = updateTimeMs/1000;
 
 //functions
 async function getValue(crypto){
@@ -35,6 +36,7 @@ function addData(chart, label, data, dataset) {
     chart.data.datasets[dataset].data.push(data);
     chart.update();
 }
+//needed to avoid duplicated labels
 function addData2(chart, data, dataset){
     chart.data.datasets[dataset].data.push(data);
     chart.update();
@@ -58,7 +60,8 @@ window.addEventListener('load',async()=>{
 
 
 //updates
-btn.addEventListener('click', async (event)=>{
+addCurrencyButton.addEventListener('click', async (event)=>{
+    const opt = document.querySelector('#cryptoSelector');
     event.preventDefault();
     let newLabel = opt.value;
     let newValue = await getValue(newLabel);
@@ -90,8 +93,14 @@ window.setInterval(async()=>{
         i++;
     }
     
-},10000);
-
+},updateTimeMs);
+window.setInterval(async ()=>{
+    let remainingTime = timeCounter.innerText;
+    timeCounter.innerText = remainingTime-1;
+    if(remainingTime == 0){
+        timeCounter.innerText = updateTimeMs/1000;
+    }
+},1000);
 
 //chart
 const ctx = document.getElementById('myChart').getContext('2d');
@@ -104,7 +113,7 @@ let chart = new Chart(ctx, {
         labels: [],
         datasets: [
             {
-            label: 'BTC-R$',
+            label: 'ETH-R$',
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: [],
@@ -119,7 +128,9 @@ let chart = new Chart(ctx, {
         scales:{
             yAxes:[{
                 ticks:{
-                    stepSize: 200 
+                    min: 2000,
+                    max: 15000,
+                    stepSize: 100
                 }
             }]
         }

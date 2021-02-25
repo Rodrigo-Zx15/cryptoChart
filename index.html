@@ -10,12 +10,19 @@
 </head>
 <body>
     <form action="">
-        <select name="cryptoSelector" id="selector">
-            <option value="eth">Etherium</option>
-            <option value="doge">Doge Coin</option>
+        <select name="cryptoSelector" id="cryptoSelector">
+            <option value="mkr">Maker</option>
+            <option value="bch">Bitcoin Cash</option>
+            <option value="ltc">Litecoin</option>
+            <option value="btc">Bitcoin</option>
         </select>
+        
         <button id='confirm'>Add</button>
     </form>
+    <div id="counterContainer">
+        <p>Seconds until next update:</p>
+        <p id='counter'><span id='seconds'></span>s</p>
+    </div>
     <canvas id='myChart'></canvas>
     
 
