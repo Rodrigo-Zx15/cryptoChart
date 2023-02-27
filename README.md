@@ -1,4 +1,5 @@
 # LEIA COM ATENÇÃO
+#[WIP] Consertando erros nas requests da API. Provável que haja mudanças na API a ser utilizada.
 # APIs usadas: ChartJS, Axios.
 #
 # Devido a diferença de preço entre as moedas, é possível que o gráfico fique visualmente feio caso uma criptomoeda de alto valor em relação as outras seja inserida.
